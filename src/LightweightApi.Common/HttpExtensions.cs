@@ -26,12 +26,11 @@ namespace LightweightApi.Common
             {
                 var obj = Serializer.Deserialize<T>(jsonTextReader);
 
-                var results = new List<ValidationResult>();
-                if (Validator.TryValidateObject(obj, new ValidationContext(obj), results))
+                if (Validator.TryValidateObject(obj, new ValidationContext(obj), new List<ValidationResult>()))
                     return obj;
 
                 httpContext.Response.StatusCode = 400;
-                await httpContext.Response.WriteJson(results);
+                await httpContext.Response.WriteJson(new List<ValidationResult>());
 
                 return default(T);
             }
