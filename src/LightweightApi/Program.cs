@@ -21,7 +21,7 @@ namespace LightweightApi
                 .AddEnvironmentVariables().Build();
 
             var host = new WebHostBuilder()
-                .UseKestrel()
+                .UseKestrel( k => k.Listen(System.Net.IPAddress.Any, 88))
                 .UseConfiguration(config)
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .ConfigureLogging(l =>

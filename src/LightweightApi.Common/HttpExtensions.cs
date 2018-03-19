@@ -28,9 +28,7 @@ namespace LightweightApi.Common
 
                 var results = new List<ValidationResult>();
                 if (Validator.TryValidateObject(obj, new ValidationContext(obj), results))
-                {
                     return obj;
-                }
 
                 httpContext.Response.StatusCode = 400;
                 await httpContext.Response.WriteJson(results);
